@@ -5,7 +5,7 @@ const router = Router()
 
 router.get('/', usersGet)
 
-router.put('/', usersPut)
+router.put('/:userId', usersPut)
 router.post('/', usersPost)
 router.delete('/', usersDelete)
 

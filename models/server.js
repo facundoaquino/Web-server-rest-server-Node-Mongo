@@ -1,5 +1,6 @@
 const express = require('express')
 const cors = require('cors');
+const { json } = require('express');
 class Server {
 	constructor() {
 		this.app = express()
@@ -16,6 +17,10 @@ class Server {
 	middlewares() {
 		// cors
         this.app.use(cors())
+        //parsear el body
+
+        this.app.use(express.json())
+         
 
 		//tiene prioridad el index html sobre el send del get en la raiz
 		this.app.use(express.static('public'))
