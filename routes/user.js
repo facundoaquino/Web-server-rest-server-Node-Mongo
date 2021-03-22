@@ -1,12 +1,34 @@
 const { Router } = require('express')
+const { check } = require('express-validator')
 const { usersGet, usersPost, usersPut, usersDelete } = require('../controllers/userController')
+const validateFields = require('../middlewares/validateFields')
+const Role = require('../models/role')
+
 
 const router = Router()
 
 router.get('/', usersGet)
 
 router.put('/:userId', usersPut)
-router.post('/', usersPost)
+router.post(
+	'/',
+	[
+		check('email', 'El correo no es valid').isEmail(),
+		check('name', 'El nombre es obligatorio').not().isEmpty(),
+		check('password', 'El password tiene que tener mas de 6 caracteres').isLength({ min: 6 }),
+		// check('role', 'No es un rol permitido').isIn('ADMIN', 'USER'),
+        //aca personalizamos los roles dinamicamente con los que se encuentran personalizados en la base de datos
+        //con el throw new error devolvemos el error
+        check('role').custom( async(role='')=>{
+            const rolExists = await Role.findOne({role})
+            if(!rolExists){
+                throw new Error(`El rol ${role} es incorrecto`)
+            }
+        }),
+		validateFields,
+	],
+	usersPost
+)
 router.delete('/', usersDelete)
 
 module.exports = router
