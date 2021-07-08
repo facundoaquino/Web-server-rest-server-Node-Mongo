@@ -8,7 +8,7 @@ const dbConnection = async () => {
 			useCreateIndex: true,
 			useFindAndModify: false,
 		})
-        console.log('base de datos online');
+		console.log('base de datos online')
 	} catch (error) {
 		throw new Error('error en la base de datos')
 	}
