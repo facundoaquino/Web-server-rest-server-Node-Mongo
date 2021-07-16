@@ -55,7 +55,6 @@ const usersPut = async (req, res) => {
 const usersDelete = async (req, res) => {
 	const { userId } = req.params
 	// console.log(userId)
-
 	// borrado fisico
 	// const user = await User.findOneAndDelete(userId)
 
@@ -64,6 +63,7 @@ const usersDelete = async (req, res) => {
 
 	res.status(200).json({
 		user,
+		userLoged: req.user,
 	})
 }
 

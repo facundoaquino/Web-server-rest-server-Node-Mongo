@@ -35,8 +35,8 @@ const UserSchema = Schema({
 //para sobrescribir un metodo tiene que ser function porque usa contexto this
 // no vamos a ver ni la version __v ni el password en la response con el json
 UserSchema.methods.toJSON = function () {
-	const { __v, password, ...user } = this.toObject()
-	return user
+	const { __v, password, _id, ...user } = this.toObject()
+	return { ...user, uid: _id }
 }
 
 //mongoose le agrega el prural automatiamente a la coleccion por eso se pone en minuscula
