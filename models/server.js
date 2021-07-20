@@ -7,6 +7,11 @@ class Server {
 		this.port = process.env.PORT
 		this.usersPath = '/api/users'
 		this.authPath = '/api/auth'
+		this.paths = {
+			auth: '/api/auth',
+			user: '/api/users',
+			categories: '/api/categories',
+		}
 
 		//Conectar a la base de datos
 		this.connectDb()
@@ -34,8 +39,9 @@ class Server {
 	}
 
 	routes() {
-		this.app.use(this.usersPath, require('./../routes/user'))
-		this.app.use(this.authPath, require('./../routes/auth'))
+		this.app.use(this.paths.user, require('./../routes/user'))
+		this.app.use(this.paths.auth, require('./../routes/auth'))
+		this.app.use(this.paths.categories, require('./../routes/categories'))
 	}
 
 	listen() {
