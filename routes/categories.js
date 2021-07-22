@@ -1,5 +1,5 @@
 const { Router } = require('express')
-const { checkk, check } = require('express-validator')
+const {  check } = require('express-validator')
 const {
 	createCategory,
 	getCategories,
