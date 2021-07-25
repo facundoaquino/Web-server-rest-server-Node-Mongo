@@ -67,9 +67,13 @@ const usersDelete = async (req, res) => {
 	})
 }
 
+
+
 module.exports = {
 	usersGet,
 	usersPost,
 	usersPut,
 	usersDelete,
+
+	 
 }
